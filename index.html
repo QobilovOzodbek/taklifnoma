@@ -1434,22 +1434,22 @@
         <div class="countdown" id="luxuryCountdown">
 
           <div class="countdown-item">
-            <span class="flip-number" id="daysFlip">0</span>
+            <span class="flip-number" id="days">0</span>
             <small>kun</small>
           </div>
 
           <div class="countdown-item">
-            <span class="flip-number" id="hoursFlip">0</span>
+            <span class="flip-number" id="hours">0</span>
             <small>soat</small>
           </div>
 
           <div class="countdown-item">
-            <span class="flip-number" id="minutesFlip">0</span>
+            <span class="flip-number" id="minutes">0</span>
             <small>daqiqa</small>
           </div>
 
           <div class="countdown-item">
-            <span class="flip-number" id="secondsFlip">0</span>
+            <span class="flip-number" id="seconds">0</span>
             <small>soniya</small>
           </div>
 
@@ -1926,4 +1926,146 @@
     );
 
 
+    document.addEventListener(
+      "pointermove",
+      onPointerMove
+    );
+
+    document.addEventListener(
+      "touchmove",
+      onPointerMove,
+      { passive: false }
+    );
+
+    document.addEventListener(
+      "pointerup",
+      onPointerUp
+    );
+
+    document.addEventListener(
+      "touchend",
+      onPointerUp
+    );
+
+
+    /* =========================
+       AUDIO
+    ========================= */
+
+    const btn =
+      document.getElementById("musicToggle");
+
+    const music =
+      document.getElementById("bgMusic");
+
+
+    btn.addEventListener("click", () => {
+
+      if (music.paused) {
+
+        music.play();
+
+        btn.textContent = "▷";
+
+      } else {
+
+        music.pause();
+
+        btn.textContent = "❚❚";
+
+      }
+
+    });
+
+
+    /* =========================
+       COUNTDOWN
+    ========================= */
+
+    const weddingDate = new Date("2026-10-15T18:30:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
+
+      if (distance <= 0) {
+        document.getElementById("days").textContent = "0";
+        document.getElementById("hours").textContent = "0";
+        document.getElementById("minutes").textContent = "0";
+        document.getElementById("seconds").textContent = "0";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((distance / (1000 * 60)) % 60);
+      const seconds = Math.floor((distance / 1000) % 60);
+
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = hours;
+      document.getElementById("minutes").textContent = minutes;
+      document.getElementById("seconds").textContent = seconds;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+
+    /* =========================
+       SCROLL REVEAL
+    ========================= */
+
+    const observer =
+      new IntersectionObserver(
+        (entries) => {
+
+          entries.forEach((entry) => {
+
+            if (entry.isIntersecting) {
+
+              entry.target
+                .querySelectorAll(
+                  ".reveal, .animate-up"
+                )
+                .forEach((el) => {
+
+                  el.classList.add("active");
+
+                });
+
+
+              const bg =
+                entry.target.querySelector(
+                  ".invite-bg"
+                );
+
+              if (bg) {
+                bg.style.transform =
+                  "scale(1)";
+              }
+
+            }
+
+          });
+
+        },
+        {
+          threshold: 0.3
+        }
+      );
+
+
     document
+      .querySelectorAll(
+        ".invite-section, .location-winner-section"
+      )
+      .forEach((section) => {
+
+        observer.observe(section);
+
+      });
+
+  </script>
+
+</body>
+</html>
