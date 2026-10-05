@@ -1232,7 +1232,7 @@
       </div>
 
       <div class="lock-arabic">
-        وَأَلَّفَ بَيْنَ قُلُوبِهِمْ
+        وَأَلَّفَ بَيْنَ قُلُوبِهِمْ
       </div>
 
       <div class="lock-translation">
@@ -1336,7 +1336,7 @@
         <div class="divider"></div>
 
         <div class="arabic">
-          وَأَلَّفَ بَيْنَ قُلُوبِهِمْ
+          وَأَلَّفَ بَيْنَ قُلُوبِهِمْ
         </div>
 
         <div class="translation">
@@ -1785,7 +1785,6 @@
 
     const sliderThumb =
       document.getElementById("sliderThumb");
-    const weddingDate = new Date("2026-10-15T18:30:00").getTime();
     const sliderTrack =
       document.getElementById("sliderTrack");
 
@@ -1927,160 +1926,4 @@
     );
 
 
-    document.addEventListener(
-      "pointermove",
-      onPointerMove
-    );
-
-    document.addEventListener(
-      "touchmove",
-      onPointerMove,
-      { passive: false }
-    );
-
-    document.addEventListener(
-      "pointerup",
-      onPointerUp
-    );
-
-    document.addEventListener(
-      "touchend",
-      onPointerUp
-    );
-
-
-    /* =========================
-       AUDIO
-    ========================= */
-
-    const btn =
-      document.getElementById("musicToggle");
-
-    const music =
-      document.getElementById("bgMusic");
-
-
-    btn.addEventListener("click", () => {
-
-      if (music.paused) {
-
-        music.play();
-
-        btn.textContent = "▷";
-
-      } else {
-
-        music.pause();
-
-        btn.textContent = "❚❚";
-
-      }
-
-    });
-
-
-    /* =========================
-       COUNTDOWN
-
-       Sana berilmagani uchun
-       countdown hozircha
-       o'chirilgan holatda.
-    ========================= */
-
-    function updateCountdown() {
-
-      /*
-        TO‘Y SANASI MA'LUM BO‘LGACH:
-
-        const targetDate =
-          new Date(
-            2026,
-            9,
-            10,
-            18,
-            30,
-            0
-          );
-
-        shu yerga qo‘yiladi.
-      */
-
-      document.getElementById(
-        "daysFlip"
-      ).textContent = "—";
-
-      document.getElementById(
-        "hoursFlip"
-      ).textContent = "—";
-
-      document.getElementById(
-        "minutesFlip"
-      ).textContent = "—";
-
-      document.getElementById(
-        "secondsFlip"
-      ).textContent = "—";
-
-    }
-
-    updateCountdown();
-
-
-    /* =========================
-       SCROLL REVEAL
-    ========================= */
-
-    const observer =
-      new IntersectionObserver(
-        (entries) => {
-
-          entries.forEach((entry) => {
-
-            if (entry.isIntersecting) {
-
-              entry.target
-                .querySelectorAll(
-                  ".reveal, .animate-up"
-                )
-                .forEach((el) => {
-
-                  el.classList.add("active");
-
-                });
-
-
-              const bg =
-                entry.target.querySelector(
-                  ".invite-bg"
-                );
-
-              if (bg) {
-                bg.style.transform =
-                  "scale(1)";
-              }
-
-            }
-
-          });
-
-        },
-        {
-          threshold: 0.3
-        }
-      );
-
-
     document
-      .querySelectorAll(
-        ".invite-section, .location-winner-section"
-      )
-      .forEach((section) => {
-
-        observer.observe(section);
-
-      });
-
-  </script>
-
-</body>
-</html>
